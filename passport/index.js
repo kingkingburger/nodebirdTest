@@ -5,6 +5,7 @@ const User = require('../models/user')
 
 module.exports = () => {
     passport.serializeUser((user,done) =>{ // user === exUser
+        console.log('serialize');
         done(null, user.id);
     })
     // 세션 { 12351356426 : 1}
@@ -14,4 +15,6 @@ module.exports = () => {
             .then((user) =>done(null, user))
             .catch(err => done(err));
     })
+    local();
+    kakao();
 }
