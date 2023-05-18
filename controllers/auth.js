@@ -23,29 +23,6 @@ exports.join = async (req, res, next) => {
     }
 }
 
-// POST /auth/login
-// exports.login = (req, res, next) => {
-//     passport.authenticate('local', (authError, user, info) => {
-//         // 서버 에러
-//         if (authError) {
-//             console.error(authError);
-//             // 에러처리 미들웨어에서 알아서 하도록 보내기
-//             return next(authError);
-//         }
-//         // 유저 에러
-//         if (!user) {
-//             // 에러 메세지 띄워주게끔
-//             return res.redirect(`/?loginError=${info.message}`);
-//         }
-//         return req.login(user, (loginError) => {
-//             if (loginError) {
-//                 console.error(loginError);
-//                 return next(loginError);
-//             }
-//             return req.redirect('/')
-//         })
-//     })(req, res, next);// 미들웨어 내의 미들웨어에는 (req, res, next)를 붙입니다.
-// }
 
 exports.login = (req, res, next) => {
     passport.authenticate('local', (authError, user, info) => {
@@ -66,6 +43,8 @@ exports.login = (req, res, next) => {
     })(req, res, next); // 미들웨어 내의 미들웨어에는 (req, res, next)를 붙입니다.
 };
 
+// app.use(passport.authenticate('kakao'));
+// app.use((req,res,next) => passport.authenticate('kakao'))(req,res,next);
 
 exports.logout = (req, res, next) => {
     req.logout(() => {
