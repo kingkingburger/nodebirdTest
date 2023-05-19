@@ -12,6 +12,8 @@ dotenv.config() // process.env
 // process.env.COOKIE_SECRET 있음
 const pageRouter = require('./routes/page')
 const authRouter = require('./routes/auth')
+const postRouter = require('./routes/post')
+
 const passportConfig = require('./passport')
 
 
@@ -34,6 +36,7 @@ sequelize.sync( { force: true}) // 개발시에만 true로 하기, 싹다 날아
 
 app.use(morgan('dev')); // combind로 배포 설정
 app.use(express.static(path.join(__dirname, 'public'))); // public 접근할 수 있게
+app.use('/img', express.static(path.join(__dirname, 'uploads'))); // 사진폴더 접근할 수 있게
 app.use(express.json()); // req.body를 ajax json 요청으로 부터
 app.use(express.urlencoded({extended: false})); // req.body 폼을 만듬
 app.use(cookieParser(process.env.COOKIE_SECRET))
@@ -54,7 +57,7 @@ app.use(passport.session()); // connect.sid라는 이름으로 새션 쿠키가 
 
 app.use('/',pageRouter);
 app.use('/auth',authRouter); // authRouter와 연결
-
+app.use('/post', postRouter) // post를 관리하는 라우터
 
 // 404 NOT FOUND(위에 없는거 여기로 들어옴)
 app.use((req,res,next) =>{
