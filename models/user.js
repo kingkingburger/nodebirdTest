@@ -31,7 +31,7 @@ class User extends Sequelize.Model {
             timestamps: true, // createdAt, updatedAt 자동으로 추적
             underscored: false, // 카멜케이스 쓰기 때문에 false
             modelName: 'User', // js에서 쓰는 이름
-            tableName: 'user', // db에서 쓰는 이름
+            tableName: 'users', // db에서 쓰는 이름
             paranoid: true, // deleteadAt 유저 삭제일 추적, soft delete
             charset: 'utf8mb4',
             collate: 'utf8mb4_general_ci',

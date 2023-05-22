@@ -28,13 +28,11 @@ const upload = multer({
     limits: { fileSize: 5 * 1024 * 1024 },
 });
 
-router.post('/img', isLoggedIn, upload.single('img') ,afterUploadImage);
+// POST /post/img
+router.post('/img', isLoggedIn, upload.single('img'), afterUploadImage);
 
-
-
-const upload2 = multer({
-
-});
-// router.post('/', isLoggedIn,uploadPost);
+// POST /post
+const upload2 = multer();
+router.post('/', isLoggedIn, upload2.none(), uploadPost);
 
 module.exports = router;
