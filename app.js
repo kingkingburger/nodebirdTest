@@ -13,6 +13,7 @@ dotenv.config() // process.env
 const pageRouter = require('./routes/page')
 const authRouter = require('./routes/auth')
 const postRouter = require('./routes/post')
+const userRouter = require('./routes/user')
 
 const passportConfig = require('./passport')
 
@@ -58,6 +59,7 @@ app.use(passport.session()); // connect.sid라는 이름으로 새션 쿠키가 
 app.use('/',pageRouter);
 app.use('/auth',authRouter); // authRouter와 연결
 app.use('/post', postRouter) // post를 관리하는 라우터
+app.use('/user', userRouter) // user를 관리하는 라우터
 
 // 404 NOT FOUND(위에 없는거 여기로 들어옴)
 app.use((req,res,next) =>{

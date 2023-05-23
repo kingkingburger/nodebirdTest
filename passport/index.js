@@ -10,11 +10,26 @@ module.exports = () => {
     })
     // 세션 { 12351356426 : 1}
     //        세션 쿠키 : 로그인한아이디
-    passport.deserializeUser((id,done) =>{
-        User.findOne({where: {id}})
-            .then((user) =>done(null, user))
+    passport.deserializeUser((id, done) => {
+        User.findOne({
+            where: {id},
+            include: [
+                {
+                    model: User,
+                    attributes: ['id', 'nick'],
+                    as: 'Followers',
+                }// 팔로잉
+                , {
+                    model: User,
+                    attributes: ['id', 'nick'],
+                    as: 'Followings',
+                } // 팔로워
+            ]//
+        })
+            .then(user => done(null, user))
             .catch(err => done(err));
     });
+
 
     local();
     kakao();

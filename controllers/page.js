@@ -18,9 +18,6 @@ exports.renderMain = async (req, res, next) => {
             },
             order: [['createdAt', 'DESC']],
         });
-        console.log('posts = ' , posts);
-        console.log('posts.length = ' , posts.length);
-        console.log('posts.User = ' , posts.User);
         res.render('main', {
             title: 'NodeBird',
             twits: posts,
