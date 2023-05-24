@@ -61,6 +61,7 @@ app.use('/auth',authRouter); // authRouter와 연결
 app.use('/post', postRouter) // post를 관리하는 라우터
 app.use('/user', userRouter) // user를 관리하는 라우터
 
+
 // 404 NOT FOUND(위에 없는거 여기로 들어옴)
 app.use((req,res,next) =>{
     const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`)
