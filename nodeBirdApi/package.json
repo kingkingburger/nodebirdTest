@@ -1,14 +1,14 @@
 {
-  "name": "nodebird",
+  "name": "nodebird-api",
   "version": "0.0.1",
-  "description": "노드 버드 만들기",
-  "main": "index.js",
+  "description": "",
+  "main": "app.js",
   "scripts": {
     "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Minho",
-  "license": "MIT",
+  "author": "minho",
+  "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",
     "cookie-parser": "^1.4.6",
@@ -23,7 +23,8 @@
     "passport-kakao": "^1.0.1",
     "passport-local": "^1.0.0",
     "sequelize": "^6.31.0",
-    "sequelize-cli": "^6.6.0"
+    "sequelize-cli": "^6.6.0",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.22"

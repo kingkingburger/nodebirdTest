@@ -5,7 +5,7 @@ const Hashtag = require('./hashtag');
 const fs = require('fs');
 const path = require('path');
 const env = process.env.NODE_ENV  || 'development';
-const config = require('../config/config')[env];
+const config = require('../config/config.json')[env];
 const db = {};
 // 연결만 만들어놓은것 입니다. 실행은 app.js에서 또 해야합니다.
 const sequelize = new Sequelize(

@@ -13,6 +13,7 @@ exports.uploadPost = async (req, res, next) => {
             img: req.body.url,
             UserId: req.user.id,
         });
+        console.log('req.body = ' , req.body);
         const hashtags = req.body.content.match(/#[^\s#]*/g);
         if (hashtags) {
             const result = await Promise.all(
