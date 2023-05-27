@@ -4,7 +4,7 @@
   "description": "노드 버드 만들기",
   "main": "index.js",
   "scripts": {
-    "start": "../node_modules/.bin/nodemon app.js",
+    "start": "nodemon app",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Minho",

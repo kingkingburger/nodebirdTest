@@ -27,7 +27,7 @@ nunjucks.configure('views', {
     watch: true,
 })
 
-sequelize.sync( { force: true}) // 개발시에만 true로 하기, 싹다 날아감
+sequelize.sync( { force: false}) // 개발시에만 true로 하기, 싹다 날아감
     .then(() =>{
         console.log('데이터 베이스 연결 성공');
     })
