@@ -25,3 +25,13 @@ exports.test = async (req, res, next) => {
         return next(error);
     }
 }
+
+
+const URL = 'http://localhost:8002/v1';
+axios.defaults.headers.origin = 'http://localhost:4000';
+// axios.defaults.headers.common.origin = 'http://localhost:4000';
+
+const request =() => {};
+
+exports.getMyPosts = async (req, res, next) => {};
+exports.searchByHashtag = async (req, res, next) => {};

@@ -1,4 +1,4 @@
-const { Domain, User, Post } = require('../models');
+const { Domain, User, Post, Hashtag } = require('../models');
 const jwt = require('jsonwebtoken')
 // 토큰 발급
 exports.createToken =  async (req, res) =>{
@@ -64,5 +64,33 @@ exports.getMyPosts =  (req, res) =>{
 
 
 exports.getPostsByHashtag = async (req, res) =>{
-    res.json(res.locals.decoded);
+    try{
+        const hashtag = await Hashtag.findOne({ where : { title: req.params.title} });
+        const post = await hashtag.getPosts();
+
+        if(!hashtag){
+            return res.status(404).json({
+                code:404,
+                message: '검색결과가 없습니다.'
+            })
+        }
+
+        if(post.length === 0){
+            return res.status(404).json({
+                code:404,
+                message: '검색결과가 없습니다.'
+            })
+        }
+
+        return res.json({
+            code:200,
+            payload: posts,
+        })
+    }catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            code:500,
+            message: '서버 에러'
+        })
+    }
 }
