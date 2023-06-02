@@ -1,4 +1,4 @@
-const { Domain, User } = require('../models');
+const { Domain, User, Post } = require('../models');
 const jwt = require('jsonwebtoken')
 // 토큰 발급
 exports.createToken =  async (req, res) =>{
@@ -42,5 +42,27 @@ exports.createToken =  async (req, res) =>{
 }
 
 exports.tokenTest = async (req, res) =>{
+    res.json(res.locals.decoded);
+}
+
+// promise로 만들기
+exports.getMyPosts =  (req, res) =>{
+    Post.findAll({where: {userId: res.locals.decodeed.id} })
+        .then((posts) =>{
+            res.json({
+                code:200,
+                payload: posts,
+            })
+        })
+        .catch((error) =>{
+            return res.status(500).json({
+                code:500,
+                message: '서버 에러',
+            })
+        })
+}
+
+
+exports.getPostsByHashtag = async (req, res) =>{
     res.json(res.locals.decoded);
 }
