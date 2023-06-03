@@ -27,11 +27,47 @@ exports.test = async (req, res, next) => {
 }
 
 
-const URL = 'http://localhost:8002/v1';
-axios.defaults.headers.origin = 'http://localhost:4000';
+const URL = process.env.URL;
+axios.defaults.headers.origin = process.env.ORIGIN;
 // axios.defaults.headers.common.origin = 'http://localhost:4000';
 
-const request =() => {};
+const request = async (req, api) => {
+    try{
+        // 토큰이 없다면 발급받기
+        if(!req.session.jwt) {
+            const tokenResult = await axios.post(`${URL}/token`,{
+                clientSecret: process.env.CLINET_SECRET,
+            });
+            req.session.jwt = tokenResult.data.token;
+        }
+        return await axios.get(`${URL}${api}`,{
+            headers: { authorization: req.session.jwt },
+        });
+    }catch(error){
+        if(error.response?.status === 419){
+            delete req.session.jwt;
+            return request(req,api);
+        }
+        throw  error.response
+    }
+};
 
-exports.getMyPosts = async (req, res, next) => {};
-exports.searchByHashtag = async (req, res, next) => {};
+exports.getMyPosts = async (req, res, next) => {
+    try{
+        const result = await request(req, '/posts/my');
+        res.json(result.data);
+    }catch(error){
+        console.error(error);
+        next(error)
+    }
+};
+
+exports.searchByHashtag = async (req, res, next) => {
+    try{
+        const result = await request(req, `/posts/hashtag/${encodeURIComponent(req.params.hashtag)}`);
+        res.json(result.data);
+    }catch(error){
+        console.error(error);
+        next(error)
+    }
+};
