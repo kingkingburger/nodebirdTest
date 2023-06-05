@@ -12,6 +12,7 @@ dotenv.config() // process.env
 // process.env.COOKIE_SECRET 있음
 const authRouter = require('./routes/auth')
 const indexRouter = require('./routes')
+const v1 = require('./routes/v1')
 
 const passportConfig = require('./passport')
 
@@ -55,6 +56,7 @@ app.use(passport.session()); // connect.sid라는 이름으로 새션 쿠키가 
 
 app.use('/auth',authRouter); // authRouter와 연결
 app.use('/', indexRouter);
+app.use('/v1', v1);
 
 // 404 NOT FOUND(위에 없는거 여기로 들어옴)
 app.use((req,res,next) =>{
